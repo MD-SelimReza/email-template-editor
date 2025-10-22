@@ -39,7 +39,6 @@ export default function App() {
 
       // Clean up
       URL.revokeObjectURL(url);
-      alert('HTML file exported successfully!');
     });
   };
 
@@ -70,7 +69,6 @@ export default function App() {
 
       // Clean up
       URL.revokeObjectURL(url);
-      alert('Design saved successfully!');
     });
   };
 
@@ -86,8 +84,7 @@ export default function App() {
     }
   };
 
-  const onReady = (e: any): void => {
-    console.log('Console all event -->', e);
+  const onReady = (): void => {
     console.log('Email editor is ready');
   };
 
@@ -127,11 +124,7 @@ export default function App() {
 
       {/* Editor/Preview Area */}
       <div className="flex-1 overflow-hidden">
-        <EmailEditor
-          ref={emailEditorRef}
-          onReady={(e) => onReady(e)}
-          minHeight="100%"
-        />
+        <EmailEditor ref={emailEditorRef} onReady={onReady} minHeight="100%" />
       </div>
     </div>
   );
