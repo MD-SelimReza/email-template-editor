@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState } from 'react';
 import EmailEditor, { type EditorRef } from 'react-email-editor';
 import { Download, Eye, Save } from 'lucide-react';
@@ -85,7 +84,14 @@ export default function App() {
   };
 
   const onReady = (): void => {
-    console.log('Email editor is ready');
+    const editor = emailEditorRef.current?.editor;
+    if (!editor) return;
+
+    // Force editor container width
+    editor.setBodyValues({
+      contentWidth: '720px',
+      backgroundColor: '#ffffff',
+    });
   };
 
   return (
@@ -124,7 +130,16 @@ export default function App() {
 
       {/* Editor/Preview Area */}
       <div className="flex-1 overflow-hidden">
-        <EmailEditor ref={emailEditorRef} onReady={onReady} minHeight="100%" />
+        <EmailEditor
+          ref={emailEditorRef}
+          onReady={onReady}
+          minHeight="100%"
+          options={{
+            appearance: {
+              theme: 'light',
+            },
+          }}
+        />
       </div>
     </div>
   );
